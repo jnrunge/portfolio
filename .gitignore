@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+fake_disease_ml/randomForest_dontupload.R
+README.html
