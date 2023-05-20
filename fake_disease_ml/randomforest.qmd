@@ -2,6 +2,8 @@
 title: "randomForest"
 format: html
 editor: visual
+execute:
+  cache: true
 ---
 
 ## Random Forest Tests
@@ -96,7 +98,7 @@ summary(data_combined$phenotype)
 
 Above, you can see the distribution of the phenotype. A bit imbalanced, but still plenty of samples.
 
-Let's have a look at the traits we have.
+Let's have a look at the traits we have. **But note that they have ben scaled for better modelling.**
 
 ```{r}
 library(ggplot2)
@@ -104,16 +106,16 @@ ggplot(data_combined%>%pivot_longer(cols=c(locus_1,locus_2,locus_3,locus_4)), ae
     geom_bar(position="fill")+facet_wrap(~name)+xlab("Genotype")+ylab("Fraction")+theme_bw(16)
 
 ggplot(data_combined, aes(age, fill = phenotype)) +
-  geom_histogram(position = "fill")+theme_bw(16)
+  geom_histogram(position = "fill")+theme_bw(16)+ylab("Fraction")
 
 ggplot(data_combined, aes(weight, fill = phenotype)) +
-  geom_histogram(position = "fill")+theme_bw(16)
+  geom_histogram(position = "fill")+theme_bw(16)+ylab("Fraction")
 
 ggplot(data_combined, aes(affected_trait)) +
   geom_histogram()+theme_bw(16)
 
 ggplot(data_combined, aes(affected_trait, fill = phenotype)) +
-  geom_histogram(position = "fill")+theme_bw(16)
+  geom_histogram(position = "fill")+theme_bw(16)+ylab("Fraction")
 
 ggplot(data_combined, aes(weight, affected_trait, color = phenotype)) +
   geom_point(shape = 1)+theme_bw(16)
@@ -166,7 +168,7 @@ Let's see how well the model works!
 ```{r}
 p <- predict(fit, test_set %>% select(-(ncol(test_set) - 1)))
 
-confusionMatrix(p, test_set$phenotype)
+print(cM<-confusionMatrix(p, test_set$phenotype))
 ```
 
-So, concluding for now, we have built a random forest that is a able find \> 90% of individuals with an imaginary disease that decreases their physical fitness and is determined by three loci in a additive and epistatic fashion. We would probably not be able to use this model on a large number of loci because of performance, but I am curious how well it still works when there are more loci (of course, building a new forest with those first).
+So, concluding for now, we have built a random forest that is a able find `r round(100*cM$byClass[1],2)`% of individuals with an imaginary disease that decreases their physical fitness and is determined by three loci in a additive and epistatic fashion. We would probably not be able to use this model on a large number of loci because of performance, but I am curious how well it still works when there are more loci (of course, building a new forest with those first).
