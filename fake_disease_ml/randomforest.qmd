@@ -1,6 +1,8 @@
 ---
 title: "randomForest"
-format: html
+format: 
+  pdf: default
+  html: default
 editor: visual
 execute:
   cache: true
@@ -171,4 +173,4 @@ p <- predict(fit, test_set %>% select(-(ncol(test_set) - 1)))
 print(cM<-confusionMatrix(p, test_set$phenotype))
 ```
 
-So, concluding for now, we have built a random forest that is a able find `r round(100*cM$byClass[1],2)`% of individuals with an imaginary disease that decreases their physical fitness and is determined by three loci in a additive and epistatic fashion. We would probably not be able to use this model on a large number of loci because of performance, but I am curious how well it still works when there are more loci (of course, building a new forest with those first).
+So, concluding for now, we have built a random forest that is a able find `r round(100*cM$byClass[1],2)`% of individuals with an imaginary disease that decreases their physical fitness and is determined by three loci in a additive and epistatic fashion. We would probably not be able to use this model on a large number of loci because of performance (already this takes about an hour or so on one core), but I am curious how well it still works when there are more loci (of course, building a new forest with those first). But first, I need to look at some other models.
