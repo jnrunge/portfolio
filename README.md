@@ -2,6 +2,12 @@
 
 Putting together some examples of on the one hand still private work-in-progress projects and personal learning projects to share what I am working on.
 
+## Active repositories
+
+### Transmission distortion in yeast
+
+[Here I am publicly working on my most recent project at the University of Strasbourg.]()
+
 ## Learning projects
 
 ### Machine learning: Random forests
