@@ -1,5 +1,7 @@
 # Portfolio
 
+Better overview being built at https://janniklasrunge.de/portfolio.html
+
 Putting together some examples of on the one hand still private work-in-progress projects and personal learning projects to share what I am working on.
 
 ## Active repositories
